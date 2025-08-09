@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from data_loader import load_holdings, load_allocation
+from data_loader import load_holdings, load_allocation, load_performance, load_summary
 
 app = FastAPI(title="WealthManager Portfolio API")
 
@@ -26,3 +26,12 @@ def get_holdings():
 @app.get("/api/portfolio/allocation")
 def get_allocation():
     return load_allocation()
+
+@app.get("/api/portfolio/performance")
+def get_performance():
+    return load_performance()
+
+@app.get("/api/portfolio/summary")
+def get_portfolio_summary():
+    data = load_summary()
+    return data
