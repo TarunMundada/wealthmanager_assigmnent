@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from data_loader import load_holdings
+from data_loader import load_holdings, load_allocation
 
 app = FastAPI(title="WealthManager Portfolio API")
 
@@ -18,7 +18,11 @@ app.add_middleware(
 def health_check():
     return {"status": "ok"}
 
-@app.get("/holdings")
-def get_portfolio_holdings():
-    holdings = load_holdings()
-    return holdings
+@app.get("/api/portfolio/holdings")
+def get_holdings():
+    return load_holdings()
+
+
+@app.get("/api/portfolio/allocation")
+def get_allocation():
+    return load_allocation()
